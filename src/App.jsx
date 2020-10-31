@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Card from './components/Card'
 
  const App = () =>{
 
@@ -88,17 +89,7 @@ import './App.css';
      <div className="flex flex-col items-center my-6 mx-auto">
         <h1 className="text-white-600 text-4xl" >Codevillagefriends</h1>
         <input class="shadow appearance-none border rounded w-6/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5" type="text" placeholder="Search for your friends" />
-    <div className="flex justify-center flex-wrap">
-    {
-        friends.map((friend, friendId) => 
-        <div className="flex justify-items-center items-center m-2 flex-col border-gray-300 bg-gray-500 p-8 rounded">
-          <img src={`images/${friend.img}`} className="w-32 rounded-full" alt="pp"/>
-          <p>Name: {friend.name}</p>
-          <p>Userame: {friend.username}</p>
-          <p>email: {friend.email}</p>
-
-        </div>)
-    }</div>
+        <Card friends= {friends} />
        
       </div>
    )
