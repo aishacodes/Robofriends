@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react'
+
 import './App.css';
 import Card from './components/Card'
 
  const App = () =>{
-
+  const [filtered, setFiltered] = useState('')
 
   const friends = [
     {
@@ -85,11 +86,27 @@ import Card from './components/Card'
 
     }
   ];
+
+  const search = (ev) => {
+    console.log(ev)
+    ev.preventDefault()
+    const query = ev.target.value
+    if(!query.trim()) setFiltered(()=> null)
+    setFiltered(
+      friends.filter(friend => {
+       return friend.name.toLowerCase().trim().indexOf(query.trim().toLowerCase()) >-1
+      })
+    )
+
+  }
+
+
+
    return(
      <div className="flex flex-col items-center my-6 mx-auto">
         <h1 className="text-white-600 text-4xl" >Codevillagefriends</h1>
-        <input class="shadow appearance-none border rounded w-6/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5" type="text" placeholder="Search for your friends" />
-        <Card friends= {friends} />
+        <input class="shadow appearance-none border rounded w-6/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5" type="text" placeholder="Search for your friends" onChange={search} />
+        <Card friends= {filtered || friends} />
        
       </div>
    )
